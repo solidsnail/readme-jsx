@@ -65,7 +65,10 @@ const evaluateHTML = (browser, html) =>
       return elements.map((el, i) => {
         return {
           globalstyle: `<style>${styles}</style>`,
-          html: el.outerHTML,
+          html: el.outerHTML
+            .replace(/(<img\b[^<>]*[^<>\/])>/gi, "$1/>")
+            .replace(/(<br\b[^<>]*[^<>\/])>/gi, "$1/>")
+            .replace(/(<input\b[^<>]*[^<>\/])>/gi, "$1/>"),
           filename: `${el.tagName}_${i}`
         };
       });
@@ -100,7 +103,7 @@ const takeSnapshots = (browser, snapshots, dir) =>
         replace: snap.html
           .replace(/<style\s+data-reactroot.*?<\/style>/gims, "")
           .replace(/<style\s+data-emotion-css.*?<\/style>/gims, ""),
-        with: `<img src="${dir}/${snap.filename}.png" />`
+        with: `\n<img src="${dir}/${snap.filename}.png" />`
       });
     });
     resolve(Promise.all(replacers));
@@ -131,6 +134,7 @@ const replaceTags = (replacers, html) =>
   new Promise(async (resolve, reject) => {
     let markdown = await stripStyles(html);
     markdown = replacers.reduce((html, replacer) => {
+      console.log(replacer);
       return html.replace(new RegExp(replacer.replace, "g"), replacer.with);
     }, markdown);
 
