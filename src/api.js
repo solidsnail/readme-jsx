@@ -53,7 +53,9 @@ const evaluateHTML = (browser, html) =>
     });
     const snapshots = await page.evaluate(() => {
       const styles = Array.from(
-        document.querySelectorAll("style[data-reactroot]")
+        document.querySelectorAll(
+          "style[data-reactroot], style[data-emotion-css]"
+        )
       )
         .map(style => style.innerHTML)
         .join("\n\n");
@@ -95,7 +97,9 @@ const takeSnapshots = (browser, snapshots, dir) =>
       );
       await screenshotDOMElement(page, "body > *", snap.filename, dir);
       return Promise.resolve({
-        replace: snap.html,
+        replace: snap.html
+          .replace(/<style\s+data-reactroot.*?<\/style>/gims, "")
+          .replace(/<style\s+data-emotion-css.*?<\/style>/gims, ""),
         with: `<img src="${dir}/${snap.filename}.png" />`
       });
     });
@@ -118,15 +122,18 @@ const parseMetadata = (packagejson, markdown) => {
 
 const stripStyles = markdown =>
   Promise.resolve(
-    markdown.replace(/<style\s+data-reactroot.*?<\/style>/gims, "")
+    markdown
+      .replace(/<style\s+data-reactroot.*?<\/style>/gims, "")
+      .replace(/<style\s+data-emotion-css.*?<\/style>/gims, "")
   );
 
-const replaceTags = (replacers, packagejson, html) =>
+const replaceTags = (replacers, html) =>
   new Promise(async (resolve, reject) => {
-    let markdown = replacers.reduce((html, replacer) => {
+    let markdown = await stripStyles(html);
+    markdown = replacers.reduce((html, replacer) => {
       return html.replace(new RegExp(replacer.replace, "g"), replacer.with);
-    }, html);
-    markdown = await stripStyles(markdown);
+    }, markdown);
+
     resolve(markdown);
   });
 
@@ -142,6 +149,20 @@ const writeFile = (markdown, path) =>
     );
   });
 
+const importFile = async path => {
+  const readme = importJSX(PATH.resolve(path));
+  let result;
+  switch (typeof readme) {
+    case "function":
+      result = await readme();
+      break;
+    case "object":
+      result = readme;
+      break;
+  }
+  return Promise.resolve(result);
+};
+
 const generateMD = async (
   path = "./README.jsx",
   options = {
@@ -153,14 +174,14 @@ const generateMD = async (
   await createDir(options.assetsDir);
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  const readme = importJSX(PATH.resolve(path));
+  const readme = await importFile(path);
   const packagejson = require(PATH.resolve(options.packagejson));
   const html = await getHTML(readme, options.linebreak);
   await page.setContent(html, { waitUntil: "load" });
   let markdown = await parseMetadata(packagejson, html);
   const snapshots = await evaluateHTML(browser, markdown);
   const replacers = await takeSnapshots(browser, snapshots, options.assetsDir);
-  markdown = await replaceTags(replacers, packagejson, markdown);
+  markdown = await replaceTags(replacers, markdown);
   await writeFile(markdown, path);
   return Promise.resolve();
 };
