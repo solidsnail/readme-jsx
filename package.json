@@ -1,6 +1,6 @@
 {
   "name": "readme-jsx",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Create beautiful HD readme content with ease",
   "main": "./src/index.js",
   "scripts": {
