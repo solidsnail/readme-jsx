@@ -133,8 +133,9 @@ const stripStyles = markdown =>
 const replaceTags = (replacers, html) =>
   new Promise(async (resolve, reject) => {
     let markdown = await stripStyles(html);
+
     markdown = replacers.reduce((html, replacer) => {
-      return html.replace(new RegExp(replacer.replace, "g"), replacer.with);
+      return html.replace(replacer.replace, replacer.with);
     }, markdown);
 
     resolve(markdown);

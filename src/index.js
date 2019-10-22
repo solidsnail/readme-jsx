@@ -83,11 +83,15 @@ module.exports = {
     return list.map(item => `- [${item.done ? "x" : " "}] ${item.title}`);
   },
   COLLAPSIBLE: function({ title, children }) {
-    return `<details><summary>${title}</summary>${children}</details>`;
+    return `<details><summary>${he.decode(
+      ReactDOMServer.renderToString(title)
+    )}</summary>${he.decode(
+      ReactDOMServer.renderToString(children)
+    )}</details>`;
   },
   TABLE: function({ columns, rows }) {
     return `| ${columns
-      .map(column => `${column}`)
+      .map(column => he.decode(ReactDOMServer.renderToString(column)))
       .join(" | ")} |\n| ${columns
       .map(column => `-------------`)
       .join(" | ")} |\n${rows
@@ -101,7 +105,9 @@ module.exports = {
       .join(" | \n")} |\n`;
   },
   IMG: function({ src, href = "", alt = "" }) {
-    return `[![${alt}](${src})](${href}/)`;
+    return href
+      ? `[![${alt}](${src})](${href}/)`
+      : `<img alt="${alt}" src="${src}" />`;
   },
   BADGE: function({
     label = "",
