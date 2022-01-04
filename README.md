@@ -1,9 +1,14 @@
+
 <img src="./readme_assets/H1_0.png" />
+
 <img src="./readme_assets/H1_1.png" />
 
 
 ![LICENSE](https://img.shields.io/static/v1?label=LICENSE&message=MIT&color=e91e63&style=for-the-badge&logo=&logoColor=violet&link=&labelColor=black)
-![VERSION](https://img.shields.io/static/v1?label=VERSION&message=0.3.0&color=e91e63&style=for-the-badge&logo=&logoColor=violet&link=&labelColor=black)
+![VERSION](https://img.shields.io/static/v1?label=VERSION&message=0.5.0&color=e91e63&style=for-the-badge&logo=&logoColor=violet&link=&labelColor=black)
+
+
+
 
 
 
@@ -15,43 +20,19 @@
 > NOTICE: This file was generated with this library, you can checkout the sourecode by viewing the README.jsx file
 
 
+
 <img src="./readme_assets/H1_3.png" />
+
 <img src="./readme_assets/H1_4.png" />
-
-
-- [x] Complain to self  about how tedious it is to write docs in markdown
-
-- [x] Brainstorming
-
-- [x] Come up with a solution
-
-- [x] Initiate project
-
-- [x] Code solution
-
-- [x] Test solution manually because I'm not crazy enough to write a unit test for each case
-
-- [ ] Add gif support
-
-- [ ] Add watch mode
-
-- [ ] Maybe publish also a cli
-
-- [ ] Expand on metadata
-
-- [ ] Add custom components
-
-- [ ] Create VS Code extension
-
-
-<img src="./readme_assets/H1_5.png" />
 
 
 `npm i --save-dev readme-jsx`
 
 
-<img src="./readme_assets/H1_6.png" />
-<img src="./readme_assets/H2_7.png" />
+
+<img src="./readme_assets/H1_5.png" />
+
+<img src="./readme_assets/H2_6.png" />
 
 
 ```jsx
@@ -94,7 +75,8 @@ generateMD("./README.jsx").then(() => {
 ![LICENSE](https://img.shields.io/static/v1?label=LICENSE&message=MIT&color=blue&style=for-the-badge&logo=&logoColor=violet&link=&labelColor=black)
 
 
-<img src="./readme_assets/H2_8.png" />
+
+<img src="./readme_assets/H2_7.png" />
 
 
 ```jsx
@@ -146,9 +128,12 @@ generateMD("./README.jsx").then(() => {
 `node ./scripts/readme-gen.js`
 
 
+
+<img src="./readme_assets/H1_8.png" />
+
 <img src="./readme_assets/H1_9.png" />
-<img src="./readme_assets/H1_10.png" />
-<img src="./readme_assets/H2_11.png" />
+
+<img src="./readme_assets/H2_10.png" />
 
 
 | Component | Props | Description | Example | Preview |
@@ -172,12 +157,13 @@ generateMD("./README.jsx").then(() => {
 | TASKS | `list: {title: string, done: boolean}[]` | A list of tasks | `<TASKS list={[{title: "Refactor", done: false}, {title: "Go to sleep", done: false}]} />` | Doesn't show inside a table | 
 | COLLAPSIBLE | `title: string` | A collapsible aka accordion | `<COLLAPSIBLE  title="Show the content">The content</COLLAPSIBLE>` | <details><summary>Show the content</summary>The content</details> | 
 | TABLE | `columns: string[]; rows: string[][];` | A table, like this one | `<TABLE columns=["Fruit", "Color"]  rows={[["Banana", "Yellow"],["Watermelon","Green"]]}/>` | Doesn't show inside a table | 
-| IMG | `src: string ; href: string ; alt: string` | An image | `<IMG src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Nuvola_emblem-favorite.svg/800px-Nuvola_emblem-favorite.svg.png"/>` | [![](https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Nuvola_emblem-favorite.svg/800px-Nuvola_emblem-favorite.svg.png)](/) | 
+| IMG | `src: string ; href: string ; alt: string` | An image | `<IMG src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Nuvola_emblem-favorite.svg/800px-Nuvola_emblem-favorite.svg.png"/>` | <img alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Nuvola_emblem-favorite.svg/800px-Nuvola_emblem-favorite.svg.png" /> | 
 | BADGE | `label: string; message: string; link: string; color: string; style: "plastic" or "flat" or "flat-square" or "for-the-badge" or "social"; logo: string; logoColor: string; labelColor: string;` | A custom badge | `<BADGE label="HELLO" message="WORLD" style="for-the-badge" color="orange" />` | ![HELLO](https://img.shields.io/static/v1?label=HELLO&message=WORLD&color=orange&style=for-the-badge&logo=&logoColor=violet&link=&labelColor=black) |
 
 
 
-<img src="./readme_assets/H2_12.png" />
+
+<img src="./readme_assets/H2_11.png" />
 
 
 | Function | Arguments | Description | Example |
@@ -187,7 +173,8 @@ generateMD("./README.jsx").then(() => {
 
 
 
-<img src="./readme_assets/H2_13.png" />
+
+<img src="./readme_assets/H2_12.png" />
 
 
 | Property | Description | Example |

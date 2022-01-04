@@ -50,16 +50,22 @@ const Description = ({  }) => (
     </h1>
 );
 
+const theme = {
+  primaryFont: "Raleway",
+  secondaryFont: "Pacifico",
+  primaryColor: "#009688"
+}
+
 module.exports = (
   <React.Fragment>
     <style>
       {`
-      @import url('https://fonts.googleapis.com/css?family=Raleway:100|Pacifico&display=swap');
+      @import url('https://fonts.googleapis.com/css?family=${theme.primaryFont}:100|${theme.secondaryFont}&display=swap');
       .custom-header{
         -webkit-text-stroke-width: 2px;
         -webkit-text-stroke-color: black;
          color:red;
-        font-family: Pacifico;
+        font-family: ${theme.secondaryFont};
         width: 880px;
         font-size: 3em;
         padding: 0px 0px 10px 10px;
@@ -78,7 +84,7 @@ module.exports = (
         align-items: center;
         padding: 0px;
         color: black;
-        font-family: "Raleway";
+        font-family: "${theme.primaryFont}";
         // text-shadow: 0 0.1em 20px black, 0.05em -0.03em 0 black, 0.05em 0.005em 0 black, 0em 0.08em 0 black, 0.05em 0.08em 0 black, 0px -0.03em 0 black, -0.03em -0.03em 0 black, -0.03em 0.08em 0 black, -0.03em 0 0 black;
       }
       #description{
@@ -90,8 +96,8 @@ module.exports = (
         font-weight:800;
         justify-content: center;
         align-items: center;
-        color: #e91e63;
-        font-family: "Raleway";
+        color: ${theme.primaryColor};
+        font-family: "${theme.primaryFont}";
         font-size: 1.6em;
       }
       .header {
@@ -105,7 +111,7 @@ module.exports = (
         padding: 0px;
         color: white;
         background: black;
-        font-family: "Raleway";
+        font-family: "${theme.primaryFont}";
         text-transform: uppercase;
       }
       .subheader {
@@ -118,8 +124,8 @@ module.exports = (
         align-items: center;
         padding: 0px 5px;
         color: white;
-        font-family: "Raleway";
-        background: #e91e63;
+        font-family: "${theme.primaryFont}";
+        background: ${theme.primaryColor};
         text-transform: uppercase;
         border-top: 3px solid black;
       }
@@ -131,29 +137,13 @@ module.exports = (
 
   <BADGE label="LICENSE" message={metadata.license} style="for-the-badge" color="e91e63" />
   <BADGE label="VERSION" message={metadata.version} style="for-the-badge" color="e91e63" />
-  <BADGE label="PATREON" message="SUPPORT" style="for-the-badge" color="orange" link="https://www.patreon.com/solidsnail" />
-
+ 
   <BR /><BR/>
   <Header>About</Header><BR/>
   <QUOTE>README-JSX is a package that lets you write your README documentations in jsx, opening a multitude of new possibilities and oppurtinities to get creative.
    Not only that, but it also provides you with all the necessary components for writing traditional markdown without having to struggle with spacing and formatting... </QUOTE>
    <QUOTE>NOTICE: This file was generated with this library, you can checkout the sourecode by viewing the README.jsx file</QUOTE><BR/>
    <Header>Showcase</Header><BR/>
-   <Header>Roadmap</Header><BR/>
-   <TASKS list={[
-     {title: "Complain to self  about how tedious it is to write docs in markdown", done: true},
-     {title: "Brainstorming", done: true},
-     {title: "Come up with a solution", done: true},
-     {title: "Initiate project", done: true},
-     {title: "Code solution", done: true},
-     {title: "Test solution manually because I'm not crazy enough to write a unit test for each case", done: true},
-     {title: "Add gif support", done: false},
-     {title: "Add watch mode", done: false},
-     {title: "Maybe publish also a cli", done: false},
-     {title: "Expand on metadata", done: false},
-     {title: "Add custom components", done: false},
-     {title: "Create VS Code extension", done: false},
-   ]} /><BR/>
    <Header>Installation</Header><BR/>
    <CODE lang="shell">{`npm i --save-dev readme-jsx`}</CODE><BR/>
    <Header>Usage</Header><BR/>
